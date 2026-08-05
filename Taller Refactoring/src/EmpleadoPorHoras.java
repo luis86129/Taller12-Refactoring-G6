@@ -7,17 +7,15 @@ public class EmpleadoPorHoras extends Empleado {
         super.setSalarioBase(calcularSalario());
     }
 
+    @Override
     public void imprimirDetalles() {
-        System.out.println("Nombre: " + super.getNombre());
-        System.out.println("Genero: " + super.getNombre());
-        System.out.println("Salario: " + super.getSalarioBase());
-        System.out.println("Horas trabajadas: " + super.getHorasTrabajadas());
-        System.out.println("Departamento: " + super.getDepartamento());
+        super.imprimirDetalles();
+        System.out.println("Tarifa por hora: " + this.tarifaHora); 
     }
 
     @Override
     public double calcularSalario() {
-        double salario = super.getHorasTrabajadas() * super.getTarifaHora();
+        double salario = super.getHorasTrabajadas() * this.getTarifaHora();
         return salario;
     }
 
