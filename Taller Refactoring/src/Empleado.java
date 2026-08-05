@@ -17,30 +17,24 @@ public class Empleado {
         this.genero = genero;
     }
 
+    //tecnicas usadas: Replace Nested Conditional with Guard Clauses y Extract Method
     public double calcularSalario() {
         double salarioTotal = salarioBase;
-        if (salarioBase>0) {
-            if (horasTrabajadas >= 0) {
-                // Horas trabajadas normales = 40;
-                if (horasTrabajadas > 40) {
-                    salarioTotal += (horasTrabajadas - 40) * 50; // Pago de horas extra
-                }
-            }else {
-                throw new IllegalArgumentException("Las horas trabajadas deben ser mayor o igual a 0");
-            }
-        } else {
+
+        // en vez de ifs anidados usar Guard Clause
+        if (salarioBase <= 0) {
             throw new IllegalArgumentException("El salario debe ser mayor o igual a 0");
         }
-        switch (departamento) {
-            case "Sistemas":
-                salarioTotal += 20;
-                break;
-            case "Contabilidad":
-                salarioTotal += 10;
-                break;
-            default:
-                break;
+        if (horasTrabajadas < 0) {
+            throw new IllegalArgumentException("Las horas trabajadas deben ser mayor o igual a 0");
         }
+        if (horasTrabajadas > 40) {
+            salarioTotal += (horasTrabajadas - 40) * 50;
+        }
+
+        //llamada al metodo extraido
+        salarioTotal += calcularBonoDepartamento();
+
         return salarioTotal;
     }
 
@@ -86,11 +80,23 @@ public class Empleado {
 
     public String getGenero() {
         return genero;
-
     }
+
     public void setGenero(String genero) {
         this.genero = genero;
+    // Metodo extraido de Calcular Salario
+
+    private double calcularBonoDepartamento() {
+        switch (departamento) {
+            case "Sistemas":
+                return 20;
+            case "Contabilidad":
+                return 10;
+            default:
+                return 0;
+        }
     }
 
     // Más metodos
+    }
 }
