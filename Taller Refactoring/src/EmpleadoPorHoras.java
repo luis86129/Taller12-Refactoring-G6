@@ -3,7 +3,10 @@ public class EmpleadoPorHoras extends Empleado {
 
     public EmpleadoPorHoras(String nombre, int horasTrabajadas, double tarifaHora, String departamento, String genero) {
         super(nombre, 0, horasTrabajadas, tarifaHora, departamento, genero);
+<<<<<<< Updated upstream
         this.tarifaHora = tarifaHora; 
+=======
+>>>>>>> Stashed changes
         super.setSalarioBase(calcularSalario());
     }
 
